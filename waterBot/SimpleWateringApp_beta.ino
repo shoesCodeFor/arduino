@@ -6,11 +6,11 @@
   only when readings are taken to preven oxidation on our sensor 
   One Analog PIn to read data and one Digital Pin to power the sensor */
   
-#define SOIL_VCC  6
+#define SOIL_VCC  2
 #define SOIL_PIN  A2
 
 /* This pin will open our relay to turn on a water pump. */
-#define HOT_LEAD 1
+#define HOT_LEAD 5
 /* Timing variables */
 long previousMillis = 0;
 unsigned long currentMillis = 0;
@@ -57,7 +57,7 @@ void loop() {
     delay(1000);
     digitalWrite(HOT_LEAD, LOW);
   }
-Serial.print("Soil Status is:");
+Serial.println("Soil Status is:");
 Serial.println(soilStatus);
 delay(3000);
 }
