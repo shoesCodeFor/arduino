@@ -20,7 +20,7 @@ long soilStatus = 0;
 long runningTotal = 0;
 int count= 0;
 
-int targetMoisture = 200;
+long targetMoisture = 300;
 void setup() {
   Serial.begin(115200);
   pinMode(SOIL_VCC, OUTPUT);
@@ -41,12 +41,13 @@ void loop() {
     for(int i=0; i < interval; i++){
       runningTotal += analogRead(SOIL_PIN);
       count++;
-      Serial.print("We got ");
-      Serial.print(count);
     }
-  /* Create an average Total_of_All_Readings/Num_Of_Readings */
-  digitalWrite(SOIL_VCC, LOW);
-  soilStatus = runningTotal/count;
+    /* Create an average Total_of_All_Readings/Num_Of_Readings */
+    digitalWrite(SOIL_VCC, LOW);
+    Serial.println("We got ");
+    Serial.println(count);
+    Serial.println("readings");
+    soilStatus = runningTotal/count;
   /* Reset our counting variables */
   runningTotal=0;
   count=0;
@@ -56,8 +57,13 @@ void loop() {
     digitalWrite(HOT_LEAD, HIGH);
     delay(1000);
     digitalWrite(HOT_LEAD, LOW);
+    Serial.println("Watering.............");
+  }
+  else{
+     digitalWrite(HOT_LEAD, LOW); 
+    Serial.print("We're all good right now!"); 
   }
 Serial.println("Soil Status is:");
 Serial.println(soilStatus);
-delay(3000);
+delay(9000);
 }
